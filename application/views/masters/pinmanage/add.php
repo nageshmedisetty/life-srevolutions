@@ -1,44 +1,18 @@
-<div class="modal-dialog modal-lg" id="example-modal-lg">
-    <div class="modal-content">
-    <?php
-        $attrib = array('data-toggle' => 'validator', 'role' => 'form',  'enctype'=>"multipart/form-data");
-        echo form_open_multipart("pinmanage/update", $attrib)
-    ?>   
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle"><?=$model_title?></h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+<div class="modal-dialog sidebar-sm">
+    <form action="<?=base_url('admin/pinmanage/update')?>" class="add-new-record modal-content pt-0" method="post" enctype="multipart/form-data">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+        <div class="modal-header mb-1">
+            <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+            <div class="form-group">
+                <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                <input name="pin" id="pin" value="<?=($row ? $row->pin : "")?>" class="form-control" data-error="Please input Pin Number" placeholder="Pin Number" required="required" type="text">
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                        <label for=""> PIN Number *</label>
-                            <input name="pin" id="pin" value="<?=($row ? $row->pin : "")?>" class="form-control" data-error="Please input Pin Number" placeholder="Pin Number" required="required" type="text">
-                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <input type="hidden" value="<?=$id?>" id="id" name="id" />                 
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary ml-2" type="submit">Save changes</button>
-            </div>
-            <?php echo form_close(); ?>
-    </div>
+            
+            <input type="hidden" value="<?=$id?>" id="id" name="id" /> 
+            <button type="submit" class="btn btn-primary data-submit mr-1">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+</form>
 </div>
-
-<script>
-$(document).ready(function() {
-    
-    
-    
-   
-});
-
-// $('.myselect').select2({dropdownParent: $("#example-modal-lg")}); 
-</script>

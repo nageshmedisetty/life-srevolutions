@@ -1,69 +1,52 @@
-<!-- =============== Left side End ================-->
-<style>
-    .imgClass{
-        width: 200px;
-    height: 79px;
-    background: #ffb6c1;
-    }
-</style>
-<div class="main-content-wrap sidenav-close d-flex flex-column">
-    <!-- ============ Body content start ============= -->
-    <div class="main-content">
-        <div class="row">
-        <div class="col-md-12 mb-4">
-                <div class="row" style="padding:0px;">
-                    <div class="col-lg-12 text-center">
-                        <div class="text-danger"><?=$this->session->flashdata('error')?></div>
-                        <div class="text-success"><?=$this->session->flashdata('message')?></div>
-
+<div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0"><?=$headtitle?></h2>                            
+                        </div>
                     </div>
                 </div>
-                <div class="card text-left">
-                    <div class="card-head">
-                        <div class="row" style="padding:20px;">
-                            <div class="col-lg-3">
-                                <div class="breadcrumb">
-                                    <h4 class="mr-2"><?=$headtitle?></h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 text-center">
-                                
-                            </div>
-                            <div class="col-lg-2 text-right">
-                                <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="add(0)"> Add <?=$screen?></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body" style="min-height:550px;">
-                        <div class="table-responsive">
-                            <table  class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="width:10px;">S.No</th>
-                                        <th>Date</th>
-                                        <th>Ref Code</th>
-                                        <th>PIN Number</th>
-                                        <th style="width:100px;">Status</th>
-                                        <th style="width:10px;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="form-group breadcrumb-right">
+                    <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add(0)"> Add <?=$screen?></button>
                     </div>
                 </div>
             </div>
+            <div class="content-body">
+                
+                <!-- Basic table -->
+                <section id="basic-datatable">
+                    <div class="row" >
+                        <div class="col-12">
+                            <div class="card" style="padding:10px">
+                                <table class="datatables-basic table" id="zero_configuration_table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10px;">S.No</th>
+                                            <th>Date</th>
+                                            <th>Ref Code</th>
+                                            <th>PIN Number</th>
+                                            <th style="width:100px;">Status</th>
+                                            <th style="width:10px;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal to add new record -->                    
+                </section>
+                <!--/ Basic table -->
+
+            </div>
         </div>
+    </div>
 
-
-
-
-        <div class="flex-grow-1"></div>
-
-<link href="<?php echo base_url('public/dist-assets/css/plugins/select2.min.css'); ?>" rel="stylesheet">
-<script src="<?php echo base_url('public/dist-assets/js/plugins/select2.min.js'); ?>"></script>
-
-<script>
+    <script>
     // $('.myselect').select2();
 $(document).ready(function() {
     // $('.myselect').select2({minimumResultsForSearch: 5});
@@ -74,7 +57,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [],
         "ajax": {
-            "url": "<?php echo base_url('pinmanage/ajax_list') ?>",
+            "url": "<?php echo base_url('admin/pinmanage/ajax_list') ?>",
             "type": "POST",
             "data": function ( data ) {
 
@@ -99,18 +82,15 @@ $(document).ready(function() {
 
 });
 
-
     function add(id){
         $.ajax({
-            url : "<?php echo base_url('pinmanage/add'); ?>",
+            url : "<?php echo base_url('admin/pinmanage/add'); ?>",
             data : {id:id},
             type: "GET",
             dataType: "html",
             success: function(data)
             {
-                $('#model-data').html(data);
-                // $('.myselect').select2({minimumResultsForSearch: 5});
-                // $('.myselect').select2({dropdownParent: $("#example-modal-lg")}); 
+                $('#modals-slide-in').html(data);
                 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -120,8 +100,7 @@ $(document).ready(function() {
         });
     }
 
-    
-    function deleter(id){
+function deleter(id){
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -169,6 +148,4 @@ $(document).ready(function() {
 
         }
 
-
 </script>
-

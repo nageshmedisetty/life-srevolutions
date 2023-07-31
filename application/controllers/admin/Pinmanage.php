@@ -20,7 +20,7 @@ class Pinmanage extends MY_Controller {
 	
 			$this->data['screen'] = 'Pinmanage';
 			$this->data['headtitle'] = 'Pinmanage List';			
-			
+			$this->data['admin'] = 'admin';
 			
 			$this->page_construct('masters/pinmanage/list',$this->data);
 		
@@ -73,7 +73,7 @@ class Pinmanage extends MY_Controller {
 		$id = $this->input->get('id');
 		$this->data['id']=$id;
 		$this->data['screen'] = 'pinmanage';
-		
+		$this->data['admin'] = 'admin';
 		if($id){
 			$this->data['model_title'] = "pinmanage Details Edit";
 			$this->data['row'] = $this->pinmanage_model->getSingleRow($id);
@@ -90,7 +90,7 @@ class Pinmanage extends MY_Controller {
 
 	public function update(){
 		$id =  $this->input->post('id');		
-		
+		$this->data['admin'] = 'admin';
 		$this->form_validation->set_rules('pin', $this->lang->line("name"), 'required');
 		 if ($this->form_validation->run('pinmanage/update') == true) {
 			
@@ -107,19 +107,20 @@ class Pinmanage extends MY_Controller {
 					$this->session->set_flashdata('message', "pinmanage Created Successfully"); 
 				 }
 				
-				redirect('pinmanage/');
+				redirect('admin/pinmanage/');
 			 }else{
 				$this->session->set_flashdata('error', "Sorry! There is problem with Client M	aster Updation. Code Unique.");
-				redirect('pinmanage/');
+				redirect('admin/pinmanage/');
 			 }
 		 }else{
 			$this->session->set_flashdata('error', validation_errors());
-            redirect('pinmanage/');
+            redirect('admin/pinmanage/');
 		 }
 	}
 	
 	function delete(){		
-		$id = $_POST['id'];		
+		$id = $_POST['id'];	
+		$this->data['admin'] = 'admin';	
 		if($this->pinmanage_model->getDelete($id)){			
 			echo '1-!-pinmanage Master Deleted Successfully';
 		}			

@@ -45,16 +45,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 
                 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/pinmanage')?>"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Generate Pin</span></a>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/category')?>"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Category</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/profile')?>"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a></li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/pinmanage')?>"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Generate Pin</span></a></li>
+                <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/category')?>"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Category</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/subcategory')?>"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Sub&nbsp;category</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/items')?>"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Calendar">Products</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?=base_url('admin/reports')?>"><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Kanban">Reports</span></a>
-                </li>
+                </li> -->
                 
             </ul>
         </div>
