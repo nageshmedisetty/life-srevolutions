@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 10:05 AM
+-- Generation Time: Jul 31, 2023 at 04:54 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -38,6 +38,31 @@ CREATE TABLE `commissions` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `querydata` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diposits`
+--
+
+CREATE TABLE `diposits` (
+  `id` int(11) NOT NULL,
+  `memberId` int(11) NOT NULL,
+  `amount` decimal(24,2) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `created_on` datetime DEFAULT current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `diposits`
+--
+
+INSERT INTO `diposits` (`id`, `memberId`, `amount`, `description`, `created_by`, `created_on`, `updated_by`, `updated_on`, `status`) VALUES
+(1, 1047, '5000.00', 'Diposits', 1, '2023-07-31 19:49:46', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -196,11 +221,36 @@ CREATE TABLE `wallet` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `withdraw`
+--
+
+CREATE TABLE `withdraw` (
+  `id` int(11) NOT NULL,
+  `memberId` int(11) NOT NULL,
+  `amount` decimal(24,2) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `created_on` datetime DEFAULT current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `withdraw`
+--
+
+INSERT INTO `withdraw` (`id`, `memberId`, `amount`, `description`, `created_by`, `created_on`, `updated_by`, `updated_on`, `status`) VALUES
+(1, 1047, '2500.00', 'wertyuio', 1, '2023-07-31 19:49:46', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_register`
 --
 DROP TABLE IF EXISTS `view_register`;
 
-CREATE VIEW `view_register`  AS SELECT `register`.`id` AS `id`, `register`.`refcode` AS `refcode`, `register`.`memtype` AS `memtype`, `register`.`name` AS `name`, `register`.`email` AS `email`, `register`.`username` AS `username`, `register`.`password` AS `password`, `register`.`phone` AS `phone`, `register`.`pan` AS `pan`, `register`.`aadhar` AS `aadhar`, `register`.`accno` AS `accno`, `register`.`bankname` AS `bankname`, `register`.`ifsc` AS `ifsc`, `register`.`bankbranch` AS `bankbranch`, `register`.`address` AS `address`, `register`.`referenceId` AS `referenceId`, `register`.`active_status` AS `active_status`, `register`.`payment_status` AS `payment_status`, `register`.`plan` AS `plan`, `register`.`status` AS `status`, `register`.`jdate` AS `jdate`, `register`.`path` AS `path`, `register`.`image` AS `image`, `register`.`panfront` AS `panfront`, `register`.`panback` AS `panback`, `register`.`aadharfront` AS `aadharfront`, `register`.`aadharback` AS `aadharback`, CASE WHEN `register`.`memtype` = 1 THEN 'User' WHEN `register`.`memtype` = 3 THEN 'User' ELSE 'User' END AS `member`, (select coalesce(sum(`wallet`.`wallet_amt`),0) from `wallet` where `wallet`.`userId` = `register`.`id`) AS `walletamt` FROM `register` WHERE `register`.`status` = 1 AND `register`.`id` <> 1111 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_register`  AS SELECT `register`.`id` AS `id`, `register`.`refcode` AS `refcode`, `register`.`memtype` AS `memtype`, `register`.`name` AS `name`, `register`.`email` AS `email`, `register`.`username` AS `username`, `register`.`password` AS `password`, `register`.`phone` AS `phone`, `register`.`pan` AS `pan`, `register`.`aadhar` AS `aadhar`, `register`.`accno` AS `accno`, `register`.`bankname` AS `bankname`, `register`.`ifsc` AS `ifsc`, `register`.`bankbranch` AS `bankbranch`, `register`.`address` AS `address`, `register`.`referenceId` AS `referenceId`, `register`.`active_status` AS `active_status`, `register`.`payment_status` AS `payment_status`, `register`.`plan` AS `plan`, `register`.`status` AS `status`, `register`.`jdate` AS `jdate`, `register`.`path` AS `path`, `register`.`image` AS `image`, `register`.`panfront` AS `panfront`, `register`.`panback` AS `panback`, `register`.`aadharfront` AS `aadharfront`, `register`.`aadharback` AS `aadharback`, CASE WHEN `register`.`memtype` = 1 THEN 'User' WHEN `register`.`memtype` = 3 THEN 'User' ELSE 'User' END AS `member`, (select coalesce(sum(`wallet`.`wallet_amt`),0) from `wallet` where `wallet`.`userId` = `register`.`id`) AS `walletamt` FROM `register` WHERE `register`.`status` = 1 AND `register`.`id` <> 1111 ;
 
 --
 -- Indexes for dumped tables
@@ -210,6 +260,12 @@ CREATE VIEW `view_register`  AS SELECT `register`.`id` AS `id`, `register`.`refc
 -- Indexes for table `commissions`
 --
 ALTER TABLE `commissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `diposits`
+--
+ALTER TABLE `diposits`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -237,6 +293,12 @@ ALTER TABLE `wallet`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `withdraw`
+--
+ALTER TABLE `withdraw`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -245,6 +307,12 @@ ALTER TABLE `wallet`
 --
 ALTER TABLE `commissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `diposits`
+--
+ALTER TABLE `diposits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pin_numbers`
@@ -269,6 +337,12 @@ ALTER TABLE `valumepoints`
 --
 ALTER TABLE `wallet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `withdraw`
+--
+ALTER TABLE `withdraw`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
