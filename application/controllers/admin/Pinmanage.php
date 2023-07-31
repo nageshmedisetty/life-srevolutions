@@ -44,7 +44,7 @@ class Pinmanage extends MY_Controller {
 			$row[] = $loc->pin;
 			$row[] = ($loc->status==1 ? '<span class="badge bg-primary" style="color:#FFF">Active</span>' : '<span class="badge bg-danger" style="color:#FFF">In-active</span>');
 			
-			$action .='<a data-target=".bd-example-modal-lg" data-toggle="modal"  data-backdrop="static" data-keyboard="false" onclick="add('.$loc->id.')" style="cursor:pointer;">
+			$action .='<a  tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add('.$loc->id.')" style="cursor:pointer;">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
 					</a>';		
 			$action .=' <a class="danger" href="javascript:deleter('.$loc->id.')">

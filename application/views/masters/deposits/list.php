@@ -6,12 +6,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0"><?=$headtitle?></h2>                            
+                            <h2 class="content-header-title float-left mb-0"><?=$headtitle?></h2>  
+                            <div class="text-danger"><?=$this->session->flashdata('error')?></div>
+                            <div class="text-success"><?=$this->session->flashdata('message')?></div>                          
                         </div>
                     </div>
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                    <div class="form-group breadcrumb-right">
+                    <div class="form-group breadcrumb-right">                    
                     <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add(0)"> Add <?=$screen?></button>
                     </div>
                 </div>
@@ -27,10 +29,10 @@
                                     <thead>
                                         <tr>
                                             <th style="width:10px;">S.No</th>
+                                            <th>Member</th>
+                                            <th>Amount</th>
+                                            <th>Description</th>
                                             <th>Date</th>
-                                            <th>Ref Code</th>
-                                            <th>PIN Number</th>
-                                            <th style="width:100px;">Status</th>
                                             <th style="width:10px;">Actions</th>
                                         </tr>
                                     </thead>
@@ -59,7 +61,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [],
         "ajax": {
-            "url": "<?php echo base_url('admin/pinmanage/ajax_list') ?>",
+            "url": "<?php echo base_url('admin/deposits/ajax_list') ?>",
             "type": "POST",
             "data": function ( data ) {
 
@@ -86,7 +88,7 @@ $(document).ready(function() {
 
     function add(id){
         $.ajax({
-            url : "<?php echo base_url('admin/pinmanage/add'); ?>",
+            url : "<?php echo base_url('admin/deposits/add'); ?>",
             data : {id:id},
             type: "GET",
             dataType: "html",
@@ -113,7 +115,7 @@ function deleter(id){
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                    url : "<?php echo base_url('admin/pinmanage/delete/'); ?>",
+                    url : "<?php echo base_url('admin/deposits/delete/'); ?>",
                     data : {id: id},
                     type: "POST",
                     dataType: "html",

@@ -57,7 +57,5 @@
     </script>
 </body>
 <!-- END: Body-->
-<div class="modal modal-slide-in fade" id="modals-slide-in">
 
-</div>
 </html>
