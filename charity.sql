@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 07:38 AM
+-- Generation Time: Jul 31, 2023 at 10:05 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -63,7 +63,9 @@ INSERT INTO `pin_numbers` (`id`, `date`, `refcode`, `pin`, `status`) VALUES
 (20, '2023-06-29 15:25:00', 'BP3533375', 5555, 3),
 (21, '2023-06-29 15:25:00', 'BP3289892', 9999, 3),
 (22, '2023-06-29 15:28:14', 'BP4534866', 1111, 1),
-(23, '2023-06-29 15:28:14', 'BP1137402', 2222, 1);
+(23, '2023-06-29 15:28:14', 'BP1137402', 2222, 1),
+(24, '2023-07-31 12:32:07', '', 123, 1),
+(25, '2023-07-31 12:32:50', '', 9630, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,7 @@ INSERT INTO `register` (`id`, `refcode`, `memtype`, `name`, `email`, `username`,
 (1052, 'BP4086779', 1, 'Bujji', 'bujji809@gmail.com', 'BP4086779', '675c015f312014a13a413443488f2fbd', '7455000200', 'Maddilapalem, VSKP', 1047, 1048, 1049, 1, 1, 0, 1, '2023-07-12', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1053, 'BP3022224', 1, 'Javeed Basha', 'javeed@vowerp.com', 'BP3022224', '675c015f312014a13a413443488f2fbd', '8887444122', 'Maddilapalem, VSKP', 1047, 1049, 1050, 1, 1, 0, 1, '2023-07-12', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1054, 'BP753521', 1, 'Bhavya', 'bhavya@vowerp.com', 'BP753521', '675c015f312014a13a413443488f2fbd', '9888787885', 'Maddilapalem, VSKP', 1047, 1048, 1049, 1, 1, 0, 1, '2023-07-12', '', '', '', '', '', '', '', '', '', '', '', ''),
-(1055, 'BP4363797', 1, 'Hima', 'himajk123@gmail.com', 'BP4363797', '675c015f312014a13a413443488f2fbd', '7444445555', 'Madhurawada', 1049, 1049, 1052, 1, 1, 0, 1, '2023-07-12', '', '', '', '', '', '', '', '', '', '', '', '');
+(1055, 'BP4363797', 1, 'Hima', 'himajk123@gmail.com', 'BP4363797', '675c015f312014a13a413443488f2fbd', '7444445555', 'Madhurawada', 1049, 1049, 1052, 1, 1, 0, 1, '2023-07-12', '', '', '125462222555', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -135,6 +137,70 @@ CREATE TABLE `valumepoints` (
   `grppv` decimal(24,8) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_register`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_register` (
+`id` int(11)
+,`refcode` varchar(60)
+,`memtype` tinyint(4)
+,`name` varchar(160)
+,`email` text
+,`username` varchar(60)
+,`password` text
+,`phone` varchar(12)
+,`pan` varchar(30)
+,`aadhar` varchar(35)
+,`accno` varchar(90)
+,`bankname` varchar(120)
+,`ifsc` varchar(30)
+,`bankbranch` varchar(150)
+,`address` text
+,`referenceId` int(11)
+,`active_status` tinyint(1)
+,`payment_status` tinyint(1)
+,`plan` tinyint(1)
+,`status` tinyint(1)
+,`jdate` date
+,`path` text
+,`image` text
+,`panfront` text
+,`panback` text
+,`aadharfront` text
+,`aadharback` text
+,`member` varchar(4)
+,`walletamt` decimal(46,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wallet`
+--
+
+CREATE TABLE `wallet` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `wallet_amt` decimal(24,2) NOT NULL,
+  `date` date NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `payment_active` tinyint(1) NOT NULL,
+  `order_id` text NOT NULL,
+  `type` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_register`
+--
+DROP TABLE IF EXISTS `view_register`;
+
+CREATE VIEW `view_register`  AS SELECT `register`.`id` AS `id`, `register`.`refcode` AS `refcode`, `register`.`memtype` AS `memtype`, `register`.`name` AS `name`, `register`.`email` AS `email`, `register`.`username` AS `username`, `register`.`password` AS `password`, `register`.`phone` AS `phone`, `register`.`pan` AS `pan`, `register`.`aadhar` AS `aadhar`, `register`.`accno` AS `accno`, `register`.`bankname` AS `bankname`, `register`.`ifsc` AS `ifsc`, `register`.`bankbranch` AS `bankbranch`, `register`.`address` AS `address`, `register`.`referenceId` AS `referenceId`, `register`.`active_status` AS `active_status`, `register`.`payment_status` AS `payment_status`, `register`.`plan` AS `plan`, `register`.`status` AS `status`, `register`.`jdate` AS `jdate`, `register`.`path` AS `path`, `register`.`image` AS `image`, `register`.`panfront` AS `panfront`, `register`.`panback` AS `panback`, `register`.`aadharfront` AS `aadharfront`, `register`.`aadharback` AS `aadharback`, CASE WHEN `register`.`memtype` = 1 THEN 'User' WHEN `register`.`memtype` = 3 THEN 'User' ELSE 'User' END AS `member`, (select coalesce(sum(`wallet`.`wallet_amt`),0) from `wallet` where `wallet`.`userId` = `register`.`id`) AS `walletamt` FROM `register` WHERE `register`.`status` = 1 AND `register`.`id` <> 1111 ;
 
 --
 -- Indexes for dumped tables
@@ -165,6 +231,12 @@ ALTER TABLE `valumepoints`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wallet`
+--
+ALTER TABLE `wallet`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -178,7 +250,7 @@ ALTER TABLE `commissions`
 -- AUTO_INCREMENT for table `pin_numbers`
 --
 ALTER TABLE `pin_numbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `register`
@@ -190,6 +262,12 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `valumepoints`
 --
 ALTER TABLE `valumepoints`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wallet`
+--
+ALTER TABLE `wallet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
