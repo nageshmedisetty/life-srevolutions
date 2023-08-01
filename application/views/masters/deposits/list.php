@@ -14,7 +14,7 @@
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">                    
-                    <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add(0)"> Add <?=$screen?></button>
+                    <?php echo $button;?>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,10 @@ class Withdraw extends MY_Controller {
 	
 			$this->data['screen'] = 'Withdraw';
 			$this->data['headtitle'] = 'Withdraw List';	
+			$this->data['button'] = "";
+			if($this->session->userdata('userid')=='1'){
+				$this->data['button'] = '<button class="btn btn-primary mb-sm-0 mb-3 print-invoice" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add(0)"> Add '.$this->data['screen'].'</button>';
+			}
 			$this->page_construct('masters/withdraw/list',$this->data);
 		}
 		//$this->load->view('welcome_message');
@@ -45,10 +49,11 @@ class Withdraw extends MY_Controller {
 			$row[] = $loc->amount;
 			$row[] = $loc->description;			
 			$row[] = date('d-m-Y h:i:a', strtotime($loc->created_on));
-			
+			if($this->session->userdata('userid')=='1'){
 			$action .='<a  tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in" onclick="add('.$loc->id.')" style="cursor:pointer;">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-					</a>';		
+					</a>';	
+			}	
 			$action .=' <a class="danger" href="javascript:deleter('.$loc->id.')">
 						<i class="fa fa-trash"></i>
 					</a>';

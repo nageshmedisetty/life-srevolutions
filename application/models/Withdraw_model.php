@@ -44,6 +44,9 @@ class Withdraw_model extends CI_Model
 	function get_datatables()
 	{
 		$this->_get_datatables_query();
+		if($this->session->userdata('userid')!='1'){
+			$this->db->where('memberId',$this->session->userdata('userid'));
+		}
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();

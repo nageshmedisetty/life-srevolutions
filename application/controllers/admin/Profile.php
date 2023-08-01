@@ -27,6 +27,7 @@ class Profile extends MY_Controller {
 			if($this->session->userdata('active_status')==0){
 				$this->page_construct('userdashbord');
 			}else{
+				$this->data['button'] ="";
 				if($this->session->userdata('userid')==1){
 					$this->data['button'] = '<a href="'.base_url('admin/profile/add/0').'"><button class="btn btn-primary mb-sm-0 mb-3 print-invoice"> Add User</button></a>';
 				}
