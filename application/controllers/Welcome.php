@@ -11,14 +11,9 @@ class Welcome extends MY_Controller {
 
 	public function index()
 	{
-// 		if($this->session->userdata('userid')==''){
-// 			$this->data['header_title'] = "LogIn";
-// 			redirect("userjourney/welcome/register");
-// 		}else{
-			$this->data['header_title'] = 'Home';
-			$this->data['admin'] = null;
-			$this->page_construct('user_temp/welcome_message',$this->data);
-// 		}
+		$this->data['header_title'] = 'Home';
+		$this->data['admin'] = null;
+		$this->page_construct('user_temp/welcome_message',$this->data);
 	}
 
 	
